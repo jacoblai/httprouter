@@ -78,6 +78,7 @@ package httprouter
 
 import (
 	"net/http"
+	"strings"
 )
 
 // Handle is a function that can be registered to a route to handle HTTP
@@ -219,6 +220,7 @@ func (r *Router) DELETE(path string, handle Handle) {
 // frequently used, non-standardized or custom methods (e.g. for internal
 // communication with a proxy).
 func (r *Router) Handle(method, path string, handle Handle) {
+	path = strings.ToLower(path)
 	if path[0] != '/' {
 		panic("path must begin with '/' in path '" + path + "'")
 	}
